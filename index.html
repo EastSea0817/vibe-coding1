@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자정의 시험기간 | Midnight Exam</title>
+    <meta name="description" content="시험기간, 당신이 마주하게 될 가장 끔찍한 딴짓. 인터랙티브 공포 시뮬레이터.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Special+Elite&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Noise Overlay -->
+        <div class="noise-overlay"></div>
+        <div class="vignette"></div>
+
+        <!-- Start Screen -->
+        <section id="start-screen" class="screen active">
+            <h1 class="main-title glitch" data-text="자정의 시험기간">자정의 시험기간</h1>
+            <p class="subtitle">시험공부보다 더 무시무시한 일이 당신을 기다립니다.</p>
+            <button id="start-btn" class="horror-btn">체험 시작하기</button>
+        </section>
+
+        <!-- Story Screen -->
+        <section id="story-screen" class="screen">
+            <div class="scene-container">
+                <div id="image-portal" class="image-portal">
+                    <img id="scene-image" src="" alt="horror scene">
+                </div>
+                <div class="text-window">
+                    <div id="scene-text" class="typewriter"></div>
+                </div>
+                <div id="choice-container" class="choice-container">
+                    <!-- Choices will be injected here -->
+                </div>
+            </div>
+            
+            <!-- Audio UI -->
+            <div class="audio-controls">
+                <button id="audio-toggle" class="icon-btn">
+                    <span id="audio-icon">🔇</span>
+                    <span id="audio-status">사운드 OFF</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Ending Screen -->
+        <section id="ending-screen" class="screen">
+            <h2 id="ending-title" class="ending-title"></h2>
+            <p id="ending-desc" class="ending-desc"></p>
+            <div class="action-buttons">
+                <button id="restart-btn" class="horror-btn">다시 시작하기</button>
+                <button id="share-btn" class="classic-btn">공포 공유하기</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Background Music Holder -->
+    <audio id="bgm" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="app.js"></script>
+</body>
+</html>
