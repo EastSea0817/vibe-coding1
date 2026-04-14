@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -22,11 +22,50 @@
             <button id="start-btn" class="horror-btn">체험 시작하기</button>
         </section>
 
+        <!-- Scenario Selection Screen -->
+        <section id="select-screen" class="screen">
+            <h2 class="section-title">공포의 주제를 선택하십시오</h2>
+            <div class="select-container">
+                <div class="select-card">
+                    <div class="card-image">
+                        <img src="assets/knock_select.png" alt="Knock scenario">
+                    </div>
+                    <button id="select-knock" class="select-btn" data-desc="새벽 2시, 현관문 너머에서 들려오는 의문의 노크 소리.">
+                        <span class="btn-main">현관문 노크</span>
+                    </button>
+                </div>
+                <div class="select-card">
+                    <div class="card-image">
+                        <img src="assets/library_select.png" alt="Library scenario">
+                    </div>
+                    <button id="select-lib" class="select-btn" data-desc="아무도 없는 도서관 열람실, 복도 끝에서 들리는 울음소리.">
+                        <span class="btn-main">밤의 도서관</span>
+                    </button>
+                </div>
+                <div class="select-card">
+                    <div class="card-image">
+                        <img src="assets/sleep_select.png" alt="Sleep scenario">
+                    </div>
+                    <button id="select-sleep" class="select-btn" data-desc="몸이 움직이지 않는 가위눌림, 천장에서 내려오는 검은 형체.">
+                        <span class="btn-main">가위눌림</span>
+                    </button>
+                </div>
+            </div>
+            <p id="select-description" class="select-desc">운명을 선택하십시오...</p>
+        </section>
+
         <!-- Story Screen -->
         <section id="story-screen" class="screen">
             <div class="scene-container">
                 <div id="image-portal" class="image-portal">
                     <img id="scene-image" src="" alt="horror scene">
+                    <div id="warning-overlay" class="warning-overlay" style="display: none;">
+                        <div class="warning-content">
+                            <p class="warning-text">⚠️ 깜짝주의 ⚠️</p>
+                            <button id="reveal-btn" class="reveal-btn">확인하기</button>
+                        </div>
+                    </div>
+                    </div>
                 </div>
                 <div class="text-window">
                     <div id="scene-text" class="typewriter"></div>
