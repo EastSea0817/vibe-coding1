@@ -70,6 +70,7 @@ const stories = {
     'knock_ending_trapped': {
         id: 'knock_ending_trapped',
         text: "책상을 밀어 문을 막았지만, 소용없었습니다. 그 형체는 벽을 통과해 당신의 눈앞에 나타납니다. 당신의 시험 점수보다 더 끔찍한 기록이 당신의 인생에 남게 되었습니다.",
+        image: 'assets/knock_trapped.png',
         title: "데드 엔딩: F학점보다 무서운 것",
         isEnding: true
     },
