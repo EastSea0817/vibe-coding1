@@ -53,7 +53,9 @@ const stories = {
     },
     'knock_confront': {
         id: 'knock_confront',
-        text: "문을 열자 복도는 텅 비어 있습니다. 잠시 안도하는 순간, 당신이 미처 딛지 못한 신발장 아래에서 창백한 손들이 뻗어 나와 당신의 발목을 낚아챕니다.",
+        scary: true,
+        text: "분노가 두려움을 이겼습니다. 문을 열자 복도는 텅 비어 있습니다. 잠시 안도하는 순간, 발밑에서 무언가 기어 나오는 소리가 들립니다. 당신이 미처 딛지 못한 신발장 아래에서 창백한 손들이 뻗어 나와 당신의 발목을 낚아챕니다.",
+        image: 'assets/knock_confront.png',
         title: "데드 엔딩: 신발 밑의 진실",
         isEnding: true
     },
