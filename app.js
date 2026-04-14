@@ -45,7 +45,9 @@ const stories = {
     },
     'knock_run': {
         id: 'knock_run',
+        scary: true,
         text: "방으로 뛰어 들어가 문을 잠급니다. 하지만 등 뒤에서 싸늘한 기운이 느껴집합니다. 창문에 비친 당신의 뒤편에, 아까 문 앞에 있던 그 형체가 이미 서 있습니다. '왜... 안 열어줬어?'",
+        image: 'assets/knock_run.png',
         title: "배드 엔딩: 열리지 않은 환대",
         isEnding: true
     },
