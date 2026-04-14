@@ -59,7 +59,6 @@ const stories = {
     },
     'knock_ignore': {
         id: 'knock_ignore',
-        scary: true,
         text: "노크 소리를 무시하고 책에 고개를 묻습니다. 하지만 노크 소리는 점점 더 커지고 빨라집니다. '똑똑똑똑똑똑!' 이젠 문이 부서질 듯 덜컹거립니다. 그리고 문틈 사이로 핏빛 액체가 흘러들어오기 시작합니다.",
         image: 'assets/knock_ignore.png',
         choices: [
