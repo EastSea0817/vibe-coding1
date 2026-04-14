@@ -259,7 +259,8 @@ function loadStory(id, isBack = false) {
     if (story.image) {
         sceneImage.style.opacity = '0';
         setTimeout(() => {
-            sceneImage.src = story.image;
+            // Append a timestamp to the image URL to prevent browser caching
+            sceneImage.src = story.image + '?v=' + new Date().getTime();
             
             // Handle Scary Image Blur
             if (story.scary === true) {
