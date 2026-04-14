@@ -45,7 +45,7 @@ const stories = {
     },
     'knock_run': {
         id: 'knock_run',
-        scary: true,
+        portrait: true,
         text: "방으로 뛰어 들어가 문을 잠급니다. 하지만 등 뒤에서 싸늘한 기운이 느껴집합니다. 창문에 비친 당신의 뒤편에, 아까 문 앞에 있던 그 형체가 이미 서 있습니다. '왜... 안 열어줬어?'",
         image: 'assets/knock_run.png',
         title: "배드 엔딩: 열리지 않은 환대",
@@ -53,7 +53,6 @@ const stories = {
     },
     'knock_confront': {
         id: 'knock_confront',
-        scary: true,
         text: "분노가 두려움을 이겼습니다. 문을 열자 복도는 텅 비어 있습니다. 잠시 안도하는 순간, 발밑에서 무언가 기어 나오는 소리가 들립니다. 당신이 미처 딛지 못한 신발장 아래에서 창백한 손들이 뻗어 나와 당신의 발목을 낚아챕니다.",
         image: 'assets/knock_confront.png',
         title: "데드 엔딩: 신발 밑의 진실",
@@ -254,24 +253,21 @@ function loadStory(id, isBack = false) {
     choiceContainer.innerHTML = '';
     choiceContainer.style.display = 'none';
     
-    // Reset Jump Scare State
-    sceneImage.classList.remove('blurred');
-    warningOverlay.style.display = 'none';
+    // Reset Image Portal State
+    const imagePortal = document.getElementById('image-portal');
+    imagePortal.classList.remove('portrait-mode');
     
     // Update Image
     if (story.image) {
         sceneImage.style.opacity = '0';
         setTimeout(() => {
+            // Add portrait class if the story requires it
+            if (story.portrait) {
+                imagePortal.classList.add('portrait-mode');
+            }
+
             // Append a timestamp to the image URL to prevent browser caching
             sceneImage.src = story.image + '?v=' + new Date().getTime();
-            
-            // Handle Scary Image Blur
-            if (story.scary === true) {
-                sceneImage.classList.add('blurred');
-                warningOverlay.style.display = 'flex';
-                console.log("Scary scene detected: ", id);
-            }
-            
             sceneImage.style.opacity = '1';
         }, 300);
     }
@@ -346,10 +342,6 @@ audioToggle.addEventListener('click', () => {
 // Share Button (Mock)
 document.getElementById('share-btn').addEventListener('click', () => {
     alert("공포를 공유했습니다... 당신의 뒤에 있는 그것과 함께요.");
-});
-revealBtn.addEventListener('click', () => {
-    sceneImage.classList.remove('blurred');
-    warningOverlay.style.display = 'none';
 });
 
 // 뒤로 가기 버튼 이벤트 리스너

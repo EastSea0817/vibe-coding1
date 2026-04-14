@@ -135,111 +135,22 @@ body {
     transition: all 1s ease;
 }
 
-/* Jump Scare Warning Styles */
-.image-portal img.blurred {
-    filter: blur(50px) brightness(0.2) grayscale(1) !important;
-}
-
-.warning-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.95) !important;
-    display: none; /* Controlled by JS: flex */
-    flex-direction: column;
+/* Portrait Mode for Vertical Images */
+.image-portal.portrait-mode {
+    height: auto;
+    min-height: 300px;
+    max-height: 70vh;
+    display: flex;
     justify-content: center;
-    align-items: center;
-    z-index: 1000 !important;
-    text-align: center;
+    background: #000;
 }
 
-.warning-content {
-    animation: pulse 1s infinite alternate;
+.image-portal.portrait-mode img {
+    object-fit: contain;
+    height: auto;
+    max-height: 70vh;
 }
 
-.warning-text {
-    font-family: var(--font-heading);
-    color: #ff0000 !important;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    letter-spacing: 5px;
-    text-shadow: 0 0 20px #ff0000;
-}
-
-.reveal-btn {
-    background: #ff0000;
-    border: none;
-    color: #fff;
-    padding: 12px 35px;
-    font-family: var(--font-body);
-    font-size: 1.3rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 5px;
-}
-
-.reveal-btn:hover {
-    background: #cc0000;
-    box-shadow: 0 0 30px #ff0000;
-}
-
-@keyframes pulse {
-    from { transform: scale(1); opacity: 1; }
-    to { transform: scale(1.05); opacity: 0.8; }
-}
-.image-portal img.blurred {
-    filter: blur(40px) brightness(0.3) grayscale(1);
-}
-
-.warning-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    display: none; /* Controlled by JS */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 20;
-    text-align: center;
-}
-
-.warning-text {
-    font-family: var(--font-heading);
-    color: var(--horror-bright-red);
-    font-size: 2rem;
-    margin-bottom: 20px;
-    letter-spacing: 5px;
-    text-shadow: 0 0 10px var(--horror-red);
-    animation: flash 1.5s infinite;
-}
-
-.reveal-btn {
-    background: transparent;
-    border: 1px solid var(--horror-red);
-    color: var(--horror-red);
-    padding: 10px 30px;
-    font-family: var(--font-body);
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.reveal-btn:hover {
-    background: var(--horror-red);
-    color: #fff;
-    box-shadow: 0 0 20px var(--horror-red);
-}
-
-@keyframes flash {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
 
 .text-window {
     width: 100%;
