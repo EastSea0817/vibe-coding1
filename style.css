@@ -283,15 +283,38 @@ body {
     z-index: 1001;
 }
 
+/* Navigation UI */
+.story-nav {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 5px;
+}
+
+#back-btn {
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+#back-btn:hover {
+    opacity: 1;
+    color: var(--horror-bright-red);
+    border-color: var(--horror-red);
+}
+
+#back-btn:disabled {
+    display: none;
+}
+
 .icon-btn {
     background: rgba(0,0,0,0.5);
     border: 1px solid #333;
     color: #888;
-    padding: 10px;
+    padding: 10px 15px;
     display: flex;
     align-items: center;
     gap: 10px;
     font-size: 0.8rem;
+    cursor: pointer;
 }
 
 /* Glitch Animation */

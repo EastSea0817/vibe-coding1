@@ -163,6 +163,7 @@ const stories = {
 
 let currentStory = null;
 let isAudioOn = false;
+let historyStack = []; // Track story progression for the back button
 
 // DOM Elements
 const startScreen = document.getElementById('start-screen');
@@ -179,6 +180,7 @@ const bgm = document.getElementById('bgm');
 const selectDesc = document.getElementById('select-description');
 const warningOverlay = document.getElementById('warning-overlay');
 const revealBtn = document.getElementById('reveal-btn');
+const backBtn = document.getElementById('back-btn');
 
 // Transition Function
 function transitionToScreen(targetScreen) {
@@ -225,14 +227,24 @@ function showChoices(choices) {
 }
 
 // Load Story Node
-function loadStory(id) {
+function loadStory(id, isBack = false) {
     const story = stories[id];
     if (!story) {
         console.error("Story not found:", id);
         return;
     }
     
+    // Push the current story ID to history before changing, if not going back
+    if (!isBack && currentStory && !currentStory.isEnding) {
+        historyStack.push(currentStory.id);
+    }
+    
     currentStory = story;
+    
+    // Update Back button visibility
+    if (backBtn) {
+        backBtn.disabled = historyStack.length === 0;
+    }
     
     // Reset UI
     sceneText.innerHTML = '';
@@ -293,6 +305,7 @@ selectButtons.forEach(select => {
     const btn = document.getElementById(select.id);
     const card = btn.closest('.select-card');
     btn.addEventListener('click', () => {
+        historyStack = []; // Reset history when starting a new scenario
         transitionToScreen(storyScreen);
         loadStory(select.storyId);
         if (isAudioOn) bgm.play().catch(e => console.log("Audio play failed"));
@@ -334,3 +347,13 @@ revealBtn.addEventListener('click', () => {
     sceneImage.classList.remove('blurred');
     warningOverlay.style.display = 'none';
 });
+
+// 뒤로 가기 버튼 이벤트 리스너
+if (backBtn) {
+    backBtn.addEventListener('click', () => {
+        if (historyStack.length > 0) {
+            const previousId = historyStack.pop();
+            loadStory(previousId, true); // true를 전달하여 현재 노드가 다시 히스토리에 쌓이지 않게 함
+        }
+    });
+}
