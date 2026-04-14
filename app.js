@@ -275,7 +275,7 @@ function loadStory(id, isBack = false) {
     // Start Typing
     typeText(story.text, sceneText, () => {
         if (story.isEnding) {
-            setTimeout(() => showEnding(story), 2000);
+            setTimeout(() => showEnding(story), 7000);
         } else {
             showChoices(story.choices);
         }
