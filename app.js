@@ -1,176 +1,225 @@
 /**
  * 자정의 시험기간 | Midnight Exam
- * Interactive Horror Simulator
  */
 
 const stories = {
-    // --- Starting Points ---
-    'knock_start': {
-        id: 'knock_start',
-        text: "새벽 2시. 책상 위 스탠드 불빛만이 방 안을 비추고 있습니다. 기말고사가 코앞이라 잠을 쫓으며 전공 서적을 뒤척이던 그때, 현관문에서 희미한 소리가 들립니다. '똑... 똑...'",
+    // --- STAGE: THE DORMITORY ---
+    'dorm_start': {
+        id: 'dorm_start',
+        location: "기숙사 복도",
+        text: "자정의 대학교 기숙사. 복도는 침묵이 흐르고, 스탠드 불빛만이 책상을 비춥니다. 내일 있을 전공 시험 때문에 잠도 이루지 못하던 그때, 방문 밖에서 희미한 소리가 들립니다. '똑... 똑...'",
         image: 'assets/knock_start.png',
         choices: [
-            { text: "누구인지 확인하러 문으로 다가간다", next: 'knock_check' },
-            { text: "잘못 들었겠거니 하고 공부에 집중한다", next: 'knock_ignore' }
+            { text: "누구인지 확인하러 문으로 다가간다", next: 'dorm_check' },
+            { text: "잘못 들었겠거니 하고 공부에 집중한다", next: 'dorm_ignore' }
         ]
     },
-    'lib_start': {
-        id: 'lib_start',
-        text: "대학교 도서관 4층, 아무도 없는 열람실 구석. 시험 공부를 하다 깜빡 잠이 들었습니다. 눈을 뜨니 조명은 모두 꺼져 있고, 창밖으로 비치는 가로등 불빛만이 서늘하게 감돕니다. 저 멀리 복도 끝에서 누군가 흐느끼는 소리가 들려옵니다.",
-        image: 'assets/library.png',
-        choices: [
-            { text: "소리가 나는 곳으로 조심스럽게 가본다", next: 'lib_approach' },
-            { text: "짐을 챙겨 서둘러 도서관을 빠져나간다", next: 'lib_escape' }
-        ]
-    },
-    'sleep_start': {
-        id: 'sleep_start',
-        text: "도저히 몰려오는 잠을 이길 수 없어 침대에 몸을 던졌습니다. '딱 10분만 자고 일어나야지...' 하지만 정신은 맑은데 몸이 움직이지 않습니다. 가위눌림입니다. 그리고 방 천장 구석에서 검은 형체가 천천히 내려오는 것이 보입니다.",
-        image: 'assets/bedroom_shadow.png',
-        choices: [
-            { text: "필사적으로 손가락을 움직여 깨어나려 노력한다", next: 'sleep_struggle' },
-            { text: "눈을 질끈 감고 형체가 사라지길 기다린다", next: 'sleep_wait' }
-        ]
-    },
-
-    // --- Story Logic ---
-    'knock_check': {
-        id: 'knock_check',
-        text: "외시경으로 밖을 내다봅니다. 복도의 불은 꺼져 있지만, 문 바로 앞에 누군가 서 있는 실루엣이 보입니다. 그런데 그 사람, 머리 방향이 이상합니다. 목이 거꾸로 꺾인 채 당신을 빤히 바라보고 있습니다.",
+    'dorm_check': {
+        id: 'dorm_check',
+        location: "문 앞",
+        text: "외시경으로 밖을 내다봅니다. 복도의 자동등은 꺼져 있지만, 문 바로 앞에 누군가 서 있는 실루엣이 보입니다. 그런데 그 사람, 머리 방향이 거꾸로 꺾인 채 당신을 빤히 바라보고 있습니다.",
         image: 'assets/knock_check.png',
         choices: [
-            { text: "비명을 지르며 뒤로 물러난다", next: 'knock_run' },
-            { text: "문을 벌컥 열어젖힌다", next: 'knock_confront' }
+            { text: "비명을 지르며 창문 밖 사다리로 뛰어내린다", next: 'lib_arrival' },
+            { text: "문을 벌컥 열어젖힌다", next: 'dorm_death_confront' }
         ]
     },
-    'knock_run': {
-        id: 'knock_run',
-        portrait: true,
-        text: "방으로 뛰어 들어가 문을 잠급니다. 하지만 등 뒤에서 싸늘한 기운이 느껴집합니다. 창문에 비친 당신의 뒤편에, 아까 문 앞에 있던 그 형체가 이미 서 있습니다. '왜... 안 열어줬어?'",
-        image: 'assets/knock_run.png',
-        title: "배드 엔딩: 열리지 않은 환대",
-        isEnding: true
-    },
-    'knock_confront': {
-        id: 'knock_confront',
-        text: "분노가 두려움을 이겼습니다. 문을 열자 복도는 텅 비어 있습니다. 잠시 안도하는 순간, 발밑에서 무언가 기어 나오는 소리가 들립니다. 당신이 미처 딛지 못한 신발장 아래에서 창백한 손들이 뻗어 나와 당신의 발목을 낚아챕니다.",
+    'dorm_death_confront': {
+        id: 'dorm_death_confront',
+        location: "기숙사",
+        text: "문을 열자 복도는 텅 비어 있습니다. 안도하는 순간, 발밑에서 무언가 기어 나오는 소리가 들립니다. 신발장 아래에서 창백한 손들이 뻗어 나와 당신의 발목을 낚아챕니다.",
         image: 'assets/knock_confront.png',
         title: "데드 엔딩: 신발 밑의 진실",
         isEnding: true
     },
-    'knock_ignore': {
-        id: 'knock_ignore',
-        text: "노크 소리를 무시하고 책에 고개를 묻습니다. 하지만 노크 소리는 점점 더 커지고 빨라집니다. '똑똑똑똑똑똑!' 이젠 문이 부서질 듯 덜컹거립니다. 그리고 문틈 사이로 핏빛 액체가 흘러들어오기 시작합니다.",
+    'dorm_ignore': {
+        id: 'dorm_ignore',
+        location: "기숙사 방",
+        text: "노크 소리를 무시하려 했지만 소리는 점점 더 커지고 빨라집니다. '똑똑똑똑똑똑!' 이젠 문이 부서질 듯 덜컹거리고, 문틈 사이로 핏빛 액체가 흘러들어오기 시작합니다.",
         image: 'assets/knock_ignore.png',
         choices: [
-            { text: "방문 쪽으로 도망쳐 문을 잠근다", next: 'knock_run' },
-            { text: "책상을 밀어 현관문을 막는다", next: 'knock_ending_trapped' }
+            { text: "책상을 밀어 방문을 막는다", next: 'dorm_death_trapped' },
+            { text: "창문을 깨고 밖으로 뛰어내린다", next: 'lib_arrival' }
         ]
     },
-    'knock_ending_trapped': {
-        id: 'knock_ending_trapped',
-        text: "책상을 밀어 문을 막았지만, 소용없었습니다. 그 형체는 벽을 통과해 당신의 눈앞에 나타납니다. 당신의 시험 점수보다 더 끔찍한 기록이 당신의 인생에 남게 되었습니다.",
+    'dorm_death_trapped': {
+        id: 'dorm_death_trapped',
+        location: "기숙사",
+        text: "책상을 밀어 문을 막았지만 소용없었습니다. 그 형체는 벽을 통과해 당신의 눈앞에 나타납니다. 당신의 비명은 기숙사의 두꺼운 벽 속에 묻혔습니다.",
         image: 'assets/knock_trapped.png',
-        title: "데드 엔딩: F학점보다 무서운 것",
+        title: "데드 엔딩: 무의미한 방어",
         isEnding: true
     },
 
-    // --- Library Path ---
-    'lib_approach': {
-        id: 'lib_approach',
-        text: "흐느낌 소리를 따라가니 책장 사이에서 한 여학생이 웅크리고 앉아 있습니다. '저기요, 괜찮으세요?'라고 묻자, 그녀가 고개를 천천히 듭니다. 얼굴이 있어야 할 곳에 커다란 입만이 가득 차 있습니다. '너... 내 시험지 훔쳐갔지?'",
-        image: 'assets/lib_ghost.png',
+    // --- STAGE: THE LIBRARY ENTRANCE ---
+    'lib_arrival': {
+        id: 'lib_arrival',
+        location: "도서관 입구",
+        text: "기숙사를 탈출해 불이 켜진 대학 도서관으로 달려옵니다. 하지만 도서관 안은 평소보다 훨씬 고요하고 차갑습니다. 복도 끝 엘리베이터가 작동 중입니다.",
+        image: 'assets/library.png',
         choices: [
-            { text: "아니라고 강하게 부정하며 도망친다", next: 'lib_run' },
-            { text: "가방에서 아무 종이나 꺼내 건네준다", next: 'lib_ending_trick' }
+            { text: "엘리베이터에 탑승하여 4층 열람실로 간다", next: 'lib_elevator' },
+            { text: "계단을 통해 천천히 올라간다", next: 'lib_death_stairs' }
         ]
     },
-    'lib_escape': {
-        id: 'lib_escape',
-        text: "본능적인 공포에 짐도 내팽개치고 엘리베이터로 달려갑니다. 버튼을 미친 듯이 누르자 문이 열립니다. 안도의 한숨을 내쉬며 1층 버튼을 누르는데, 거울에 비친 엘리베이터 천장에 누군가 거꾸로 매달려 당신을 내려다보고 있습니다.",
+    'lib_death_stairs': {
+        id: 'lib_death_stairs',
+        location: "도서관 계단",
+        text: "계단을 오르는 등 뒤에서 누군가 당신을 지켜보고 있습니다. 한 걸음 내디딜 때마다 차가운 숨결이 목덜미에 닿습니다. 결국 당신은 계단 끝에서 거꾸로 매달린 그것과 마주합니다.",
+        image: 'assets/lib_death_stairs.png',
+        title: "데드 엔딩: 계단 위의 추격자",
+        isEnding: true
+    },
+    'lib_elevator': {
+        id: 'lib_elevator',
+        location: "엘리베이터 안",
+        text: "엘리베이터 거울에 당신의 모습이 비칩니다. 그런데 당신의 뒤편 천장에 누군가 매달려 있습니다! 문이 닫히려는 순간, 그 형체가 당신의 머리 위로 떨어지려 합니다.",
         image: 'assets/elevator_mirror.png',
+        isPortrait: true,
         choices: [
-            { text: "다음 층에서 열리자마자 튀어 나간다", next: 'lib_ending_elevator' },
-            { text: "비상 벨을 누른다", next: 'lib_ending_trapped_lib' }
+            { text: "문이 닫히기 직전 밖으로 몸을 날린다!", next: 'lib_stacks', qte: 5500 },
+            { text: "비상 벨을 미친 듯이 누른다", next: 'lib_death_elevator' }
         ]
     },
-    'lib_run': {
-        id: 'lib_run',
-        text: "뒤도 안 돌아보고 달립니다. 하지만 도서관 복도는 끝없이 이어지고, 뒤에선 기괴한 웃음소리가 점점 가까워집니다. 어느새 당신은 도서관 옥상 끝에 몰려 있습니다.",
-        title: "데드 엔딩: 전학생의 질투",
-        isEnding: true
-    },
-    'lib_ending_trick': {
-        id: 'lib_ending_trick',
-        text: "종이를 받은 그녀는 잠시 멈칫하더니 그것을 씹어 삼키기 시작합니다. 그 틈을 타 당신은 전력질주해 도서관을 벗어납니다. 다음 날 아침, 당신의 성적표에는 알 수 없는 붉은 얼룩이 가득했습니다.",
-        title: "생존 엔딩: 임시방편의 대가",
-        isEnding: true
-    },
-    'lib_ending_elevator': {
-        id: 'lib_ending_elevator',
-        text: "엘리베이터가 1층에 도착했습니다. 문이 열리자마자 밖으로 몸을 날립니다. 뒤를 돌아보니 엘리베이터 안에는 당신의 가방만이 덩그러니 놓여 있습니다. 도저히 다시 들어갈 엄두가 나지 않습니다.",
-        title: "생존 엔딩: 가방은 두고 갈게",
-        isEnding: true
-    },
-    'lib_ending_trapped_lib': {
-        id: 'lib_ending_trapped_lib',
-        text: "비상 벨을 눌렀지만 엘리베이터는 멈춰버렸습니다. 천장에서 들리는 '긁는 소리'가 점점 커집니다. 이제 당신이 탈출할 곳은 어디에도 없습니다.",
+    'lib_death_elevator': {
+        id: 'lib_death_elevator',
+        location: "엘리베이터",
+        text: "비상 벨을 눌렀지만 엘리베이터는 멈춘 채 문이 열리지 않습니다. 천장에서 들리는 긁는 소리가 점점 가까워지더니 어둠이 당신을 덮칩니다.",
+        image: 'assets/lib_death_elevator.png',
         title: "데드 엔딩: 멈춘 엘리베이터",
         isEnding: true
     },
 
-    // --- Sleep Path ---
-    'sleep_struggle': {
-        id: 'sleep_struggle',
-        text: "온 힘을 다해 새끼손가락부터 움직입니다. '뿌드득' 하는 소리와 함께 몸이 움직이기 시작합니다. 하지만 안심한 순간, 천장의 형체가 당신의 배 위로 순식간에 떨어집니다. 차가운 손이 당신의 목을 조릅니다.",
-        image: 'assets/choke.png',
+    // --- STAGE: THE SILENT STACKS ---
+    'lib_stacks': {
+        id: 'lib_stacks',
+        location: "도서관 서가",
+        text: "엘리베이터에서 튀어나와 책창 구역으로 숨어듭니다. 하지만 책장 사이에서 한 여학생이 피 묻은 시험지를 씹어 먹으며 당신을 굽어보고 있습니다. '내 답안지... 너지?'",
+        image: 'assets/lib_ghost.png',
         choices: [
-            { text: "옆방에 있는 가족을 부르려 비명을 지른다", next: 'sleep_scream' },
-            { text: "형체의 눈을 똑바로 쳐다본다", next: 'sleep_stare' }
+            { text: "강하게 부정하며 옆 책장으로 도망친다", next: 'lib_death_run' },
+            { text: "품속에 있던 여분의 답안지를 건네준다", next: 'lib_archive' }
         ]
     },
-    'sleep_wait': {
-        id: 'sleep_wait',
-        text: "눈을 감고 숫자를 셉니다. '일... 이... 삼...' 하지만 숫자를 셀수록 귓가에서 누군가 같이 숫자를 세는 목소리가 들립니다. 당신보다 딱 한 박자 빠르게. 그리고 그 목소리는 점점 당신의 목소리와 똑같아집니다.",
+    'lib_death_run': {
+        id: 'lib_death_run',
+        location: "도서관",
+        text: "도망치려 했지만 도서관의 책장들이 미로처럼 변해 당신의 앞길을 막습니다. 거대한 입을 벌린 그녀가 당신의 등 뒤까지 따라왔습니다.",
+        image: 'assets/lib_death_run.png',
+        title: "데드 엔딩: 불타는 질투",
+        isEnding: true
+    },
+
+    // --- STAGE: THE ARCHIVE ---
+    'lib_archive': {
+        id: 'lib_archive',
+        location: "기록 보관소",
+        text: "답안지를 받은 그녀가 기괴하게 웃으며 사라집니다. 이제 기록 보관소에 도착했습니다. 이곳을 통과하려면 조용히 잠든 사서의 눈을 피해 올바른 수건을 가져와야 합니다.",
+        image: 'assets/lib_archive.png',
+        choices: [
+            { text: "파란색 수건을 조용히 챙겨서 나간다", next: 'sleep_start' },
+            { text: "옆에 있던 빨간색 수건을 챙긴다", next: 'lib_death_archive' }
+        ]
+    },
+    'lib_death_archive': {
+        id: 'lib_death_archive',
+        location: "비평의 벽",
+        text: "빨간 수건은 피로 적셔진 함정이었습니다. 수건을 잡는 순간 당신의 손이 녹아내리기 시작합니다. 당신의 비명은 기록될 수 없는 기록이 되었습니다.",
+        image: 'assets/lib_death_archive.png',
+        title: "데드 엔딩: 피로 쓴 기록",
+        isEnding: true
+    },
+
+    // --- STAGE: EXHAUSTION ---
+    'sleep_start': {
+        id: 'sleep_start',
+        location: "열람실 책상",
+        text: "어느덧 새벽. 극도의 긴장감이 풀리며 도서관 책상 위로 고개가 떨어집니다. '딱 5분만 눈을 붙이면 괜찮아질 거야...' 하지만 그것은 돌아올 수 없는 꿈의 시작이었습니다.",
+        image: 'assets/sleep_start.png',
+        choices: [
+            { text: "무거운 눈꺼풀을 이기지 못하고 눈을 감는다", next: 'nightmare_start' }
+        ]
+    },
+
+    // --- STAGE: THE NIGHTMARE ---
+    'nightmare_start': {
+        id: 'nightmare_start',
+        location: "꿈의 심연",
+        text: "눈을 떴지만 몸이 움직이지 않습니다. 전형적인 가위눌림입니다. 천장 구석에서 검은 형체가 천천히 당신의 배 위로 내려오는 것이 보입니다. 당신의 귓가에선 누군가 당신의 시험 점수를 세기 시작합니다.",
+        image: 'assets/nightmare_start.jpg',
+        choices: [
+            { text: "필사적으로 새끼손가락을 움직여 깨어나려 한다", next: 'nightmare_struggle' },
+            { text: "눈을 질끈 감고 형체가 지나가길 기다린다", next: 'nightmare_death_wait' }
+        ]
+    },
+    'nightmare_death_wait': {
+        id: 'nightmare_death_wait',
+        location: "심연",
+        text: "숫자를 세는 목소리가 점점 커지더니 당신의 목소리와 똑같아집니다. '...구십... 구십일...' 그리고 당신 앞에 당신과 똑같이 생긴 존재가 미소 짓고 있습니다.",
         image: 'assets/double.png',
+        title: "배드 엔딩: 빼앗긴 육체",
+        isEnding: true
+    },
+    'nightmare_struggle': {
+        id: 'nightmare_struggle',
+        location: "사투",
+        text: "'뿌드득' 소리와 함께 몸이 움직이기 시작합니다. 하지만 안심한 순간, 형체가 당신의 목을 낚아챕니다! 이 꿈을 끝내려면 정면 돌파밖에 없습니다.",
+        image: 'assets/nightmare_choke.jpg',
         choices: [
-            { text: "참지 못하고 눈을 뜬다", next: 'sleep_open_eye' },
-            { text: "그대로 잠들려고 노력한다", next: 'sleep_ending_lost' }
+            { text: "당신의 목을 조르는 형체의 눈을 똑바로 쳐다본다!", next: 'nightmare_final', qte: 5700 },
+            { text: "형체의 팔을 뿌리치려 발버둥 친다", next: 'nightmare_death_choke' }
         ]
     },
-    'sleep_scream': {
-        id: 'sleep_scream',
-        text: "입을 열었지만 목소리가 나오지 않습니다. 대신 당신의 입안으로 검은 액체가 쏟아져 들어옵니다. 형체는 즐겁다는 듯 몸을 기괴하게 꺾으며 당신의 귓가에 속삭입니다. '시험... 끝나고 봐...'",
+    'nightmare_death_choke': {
+        id: 'nightmare_death_choke',
+        location: "심연",
+        text: "발버둥 칠수록 손아귀는 더 단단히 목을 죕니다. 당신의 의식은 무너지는 성적표처럼 산산조각 났습니다.",
+        image: 'assets/nightmare_death_choke.png',
         title: "데드 엔딩: 소리 없는 아우성",
         isEnding: true
     },
-    'sleep_stare': {
-        id: 'sleep_stare',
-        text: "당신이 눈을 똑바로 뜨자 형체가 멈칫합니다. 당신의 기세에 눌린 듯 형체는 서서히 연기처럼 흩어집니다. 창밖에서 아침 해가 떠오르는 것이 보입니다. 당신은 살아남았습니다. 하지만 오늘 시험은 망쳤군요.",
-        title: "트루 엔딩: 정신력의 승리",
+
+    // --- STAGE: FINAL BATTLE ---
+    'nightmare_final': {
+        id: 'nightmare_final',
+        location: "현실의 경계",
+        text: "정신력이 공포를 이겼습니다. 형체가 비명을 지르며 흩어집니다. 하지만 마지막 문턱, 거울 속에 비친 당신의 반영이 깨진 유리창을 들고 당신을 덮쳐옵니다!",
+        image: 'assets/nightmare_final.png',
+        choices: [
+            { text: "날아오는 깨진 유리를 낚아채 정면으로 돌진한다!", next: 'escape_ending', qte: 5700 },
+            { text: "공포에 질려 뒤로 물러난다", next: 'nightmare_death_final' }
+        ]
+    },
+    'nightmare_death_final': {
+        id: 'nightmare_death_final',
+        location: "심연",
+        text: "깨진 유리는 당신의 심장을 관통했습니다. 당신의 성적표에는 오직 붉은 피 자국만이 기록되었습니다.",
+        image: 'assets/nightmare_death_final.png',
+        title: "데드 엔딩: 반사된 진실",
         isEnding: true
     },
-    'sleep_open_eye': {
-        id: 'sleep_open_eye',
-        text: "눈을 뜬 순간, 코앞에 당신과 똑같이 생긴 존재가 당신을 내려다보고 있습니다. 그는 씨긋 웃으며 말합니다. '이제 내가 너 대신 시험 보러 갈게.'",
-        title: "데드 엔딩: 도플갱어",
-        isEnding: true
-    },
-    'sleep_ending_lost': {
-        id: 'sleep_ending_lost',
-        text: "결국 의식을 잃었습니다. 눈을 떴을 때는 이미 정오였습니다. 시험은 끝났고, 당신의 방에는 당신을 부르러 온 친구들의 부재중 전화만이 가득합니다. 하지만 당신의 거울에는 당신이 아닌 다른 존재가 비치고 있습니다.",
-        title: "배드 엔딩: 빼앗긴 육체",
+
+    // --- STAGE: THE ENDING ---
+    'escape_ending': {
+        id: 'escape_ending',
+        location: "아침의 고사장",
+        text: "눈부신 햇살이 쏟아집니다. 기숙사도, 도서관도 아닌 평범한 고사장 앞에 당신은 서 있습니다. 밤새 겪은 일은 정말 꿈이었을까요? 하지만 당신의 주머니엔 파란색 수건과 그날의 답안지가 남아 있습니다.",
+        image: 'assets/escape_ending.png',
+        title: "트루 엔딩: 자정의 생존자",
         isEnding: true
     }
 };
 
 let currentStory = null;
 let isAudioOn = false;
-let historyStack = []; // Track story progression for the back button
+let qteTimer = null;
+let typewriterInterval = null;
+let historyStack = [];
 
 // DOM Elements
 const startScreen = document.getElementById('start-screen');
 const selectScreen = document.getElementById('select-screen');
+const warningScreen = document.getElementById('warning-screen');
 const storyScreen = document.getElementById('story-screen');
 const endingScreen = document.getElementById('ending-screen');
 const sceneImage = document.getElementById('scene-image');
@@ -180,21 +229,19 @@ const audioToggle = document.getElementById('audio-toggle');
 const audioIcon = document.getElementById('audio-icon');
 const audioStatus = document.getElementById('audio-status');
 const bgm = document.getElementById('bgm');
-const selectDesc = document.getElementById('select-description');
-const warningOverlay = document.getElementById('warning-overlay');
-const revealBtn = document.getElementById('reveal-btn');
-const backBtn = document.getElementById('back-btn');
+const locationDisplay = document.getElementById('location-display');
+const qteContainer = document.getElementById('qte-timer-container');
+const qteProgress = document.getElementById('qte-progress');
 
 // Transition Function
 function transitionToScreen(targetScreen) {
-    [startScreen, selectScreen, storyScreen, endingScreen].forEach(s => {
-        s.classList.remove('active');
+    [startScreen, selectScreen, warningScreen, storyScreen, endingScreen].forEach(s => {
+        if (s) s.classList.remove('active');
     });
-    targetScreen.classList.add('active');
+    if (targetScreen) targetScreen.classList.add('active');
 }
 
 // Typewriter Effect
-let typewriterInterval = null;
 function typeText(text, container, callback) {
     let i = 0;
     if (typewriterInterval) clearInterval(typewriterInterval);
@@ -205,78 +252,112 @@ function typeText(text, container, callback) {
             container.innerHTML += text.charAt(i);
             i++;
             const appDiv = document.getElementById('app');
-            if (appDiv) appDiv.scrollTop = appDiv.scrollHeight;
+            // Auto-scrolling disabled per user request
         } else {
             clearInterval(typewriterInterval);
             typewriterInterval = null;
             if (callback) callback();
         }
-    }, 40);
+    }, 45);
+}
+
+// QTE Logic
+function startQTE(duration) {
+    if (!qteContainer || !qteProgress) return;
+    
+    qteContainer.style.display = 'block';
+    qteProgress.style.transform = 'scaleX(1)';
+    void qteProgress.offsetWidth;
+    
+    qteProgress.style.transition = `transform ${duration}ms linear`;
+    qteProgress.style.transform = 'scaleX(0)';
+    
+    qteTimer = setTimeout(() => {
+        qteContainer.style.display = 'none';
+        const deathNode = Object.values(stories).find(s => s.location === currentStory.location && s.isEnding);
+        loadStory(deathNode ? deathNode.id : 'dorm_death_confront');
+    }, duration);
 }
 
 // Show Choices
 function showChoices(choices) {
     choiceContainer.innerHTML = '';
+    
     choices.forEach(choice => {
         const btn = document.createElement('button');
         btn.innerText = choice.text;
         btn.className = 'choice-btn';
+        if (choice.qte) btn.classList.add('urgent');
+        
         btn.addEventListener('click', () => {
+            if (qteTimer) {
+                clearTimeout(qteTimer);
+                qteTimer = null;
+                qteContainer.style.display = 'none';
+            }
             loadStory(choice.next);
         });
         choiceContainer.appendChild(btn);
     });
+    
     choiceContainer.style.display = 'grid';
+    
+    const qteChoice = choices.find(c => c.qte);
+    if (qteChoice) {
+        startQTE(qteChoice.qte);
+    }
 }
 
 // Load Story Node
-function loadStory(id, isBack = false) {
+function loadStory(id, isRetry = false) {
     const story = stories[id];
-    if (!story) {
-        console.error("Story not found:", id);
-        return;
-    }
+    if (!story) return;
     
-    // Push the current story ID to history before changing, if not going back
-    if (!isBack && currentStory && !currentStory.isEnding) {
+    // Save to history if this is a choice point (not an ending) and not a retry
+    if (!isRetry && currentStory && !currentStory.isEnding) {
         historyStack.push(currentStory.id);
     }
     
     currentStory = story;
     
-    // Update Back button visibility
-    if (backBtn) {
-        backBtn.disabled = historyStack.length === 0;
+    // Update Location Display
+    if (locationDisplay) {
+        locationDisplay.innerText = story.location;
+        locationDisplay.style.visibility = story.location ? 'visible' : 'hidden';
     }
     
     // Reset UI
     sceneText.innerHTML = '';
     choiceContainer.innerHTML = '';
     choiceContainer.style.display = 'none';
-    
-    // Reset Image Portal State
-    const imagePortal = document.getElementById('image-portal');
-    imagePortal.classList.remove('portrait-mode');
+    if (qteContainer) qteContainer.style.display = 'none';
+    if (qteTimer) {
+        clearTimeout(qteTimer);
+        qteTimer = null;
+    }
     
     // Update Image
-    if (story.image) {
+    if (story.image && sceneImage) {
+        const portal = document.getElementById('image-portal');
+        if (portal) {
+            if (story.isPortrait) {
+                portal.classList.add('portrait-mode');
+            } else {
+                portal.classList.remove('portrait-mode');
+            }
+        }
+        
         sceneImage.style.opacity = '0';
         setTimeout(() => {
-            // Add portrait class if the story requires it
-            if (story.portrait) {
-                imagePortal.classList.add('portrait-mode');
-            }
-
-            // Append a timestamp to the image URL to prevent browser caching
             sceneImage.src = story.image + '?v=' + new Date().getTime();
             sceneImage.style.opacity = '1';
         }, 300);
     }
     
-    // Start Typing
+    // Start Interaction
     typeText(story.text, sceneText, () => {
         if (story.isEnding) {
-            setTimeout(() => showEnding(story), 7000);
+            setTimeout(() => showEnding(story), 2000);
         } else {
             showChoices(story.choices);
         }
@@ -286,71 +367,74 @@ function loadStory(id, isBack = false) {
 // Show Ending
 function showEnding(story) {
     transitionToScreen(endingScreen);
-    document.getElementById('ending-title').innerText = story.title;
-    document.getElementById('ending-desc').innerText = story.text;
+    const titleEl = document.getElementById('ending-title');
+    const descEl = document.getElementById('ending-desc');
+    const endingImg = document.getElementById('ending-image');
+    const retryBtn = document.getElementById('retry-btn');
+    
+    if (titleEl) titleEl.innerText = story.title;
+    if (descEl) descEl.innerText = story.text;
+    
+    // Set the ending image
+    if (endingImg && story.image) {
+        endingImg.src = story.image + '?v=' + new Date().getTime();
+    }
+    
+    // Show retry button only if there's a history and it's not the True Ending
+    if (retryBtn) {
+        if (historyStack.length > 0 && story.id !== 'escape_ending') {
+            retryBtn.style.display = 'block';
+        } else {
+            retryBtn.style.display = 'none';
+        }
+    }
 }
 
 // Event Listeners
-document.getElementById('start-btn').addEventListener('click', () => {
-    transitionToScreen(selectScreen);
-});
-
-// Selection Button Listeners
-const selectButtons = [
-    { id: 'select-knock', storyId: 'knock_start' },
-    { id: 'select-lib', storyId: 'lib_start' },
-    { id: 'select-sleep', storyId: 'sleep_start' }
-];
-
-selectButtons.forEach(select => {
-    const btn = document.getElementById(select.id);
-    const card = btn.closest('.select-card');
-    btn.addEventListener('click', () => {
-        historyStack = []; // Reset history when starting a new scenario
-        transitionToScreen(storyScreen);
-        loadStory(select.storyId);
-        if (isAudioOn) bgm.play().catch(e => console.log("Audio play failed"));
+const startBtn = document.getElementById('start-btn');
+if (startBtn) {
+    startBtn.addEventListener('click', () => {
+        transitionToScreen(warningScreen);
+        
+        // Wait 10 seconds then start story
+        setTimeout(() => {
+            transitionToScreen(storyScreen);
+            loadStory('dorm_start');
+            if (isAudioOn && bgm) bgm.play().catch(e => console.log("Audio play failed"));
+        }, 10000);
     });
+}
 
-    card.addEventListener('mouseenter', () => {
-        selectDesc.innerText = btn.getAttribute('data-desc');
-        selectDesc.style.color = '#ff0000';
-    });
-
-    card.addEventListener('mouseleave', () => {
-        selectDesc.innerText = '운명을 선택하십시오...';
-        selectDesc.style.color = '#888';
-    });
-});
-
-document.getElementById('restart-btn').addEventListener('click', () => {
-    transitionToScreen(startScreen);
-});
-
-audioToggle.addEventListener('click', () => {
-    isAudioOn = !isAudioOn;
-    if (isAudioOn) {
-        bgm.play().catch(e => console.log("Autoplay blocked or audio error"));
-        audioIcon.innerText = '🔊';
-        audioStatus.innerText = '사운드 ON';
-    } else {
-        bgm.pause();
-        audioIcon.innerText = '🔇';
-        audioStatus.innerText = '사운드 OFF';
-    }
-});
-
-// Share Button (Mock)
-document.getElementById('share-btn').addEventListener('click', () => {
-    alert("공포를 공유했습니다... 당신의 뒤에 있는 그것과 함께요.");
-});
-
-// 뒤로 가기 버튼 이벤트 리스너
-if (backBtn) {
-    backBtn.addEventListener('click', () => {
+const retryBtn = document.getElementById('retry-btn');
+if (retryBtn) {
+    retryBtn.addEventListener('click', () => {
         if (historyStack.length > 0) {
-            const previousId = historyStack.pop();
-            loadStory(previousId, true); // true를 전달하여 현재 노드가 다시 히스토리에 쌓이지 않게 함
+            const lastNodeId = historyStack.pop();
+            transitionToScreen(storyScreen);
+            loadStory(lastNodeId, true);
+        }
+    });
+}
+
+const restartBtn = document.getElementById('restart-btn');
+if (restartBtn) {
+    restartBtn.addEventListener('click', () => {
+        historyStack = [];
+        transitionToScreen(startScreen);
+    });
+}
+
+if (audioToggle) {
+    audioToggle.addEventListener('click', () => {
+        isAudioOn = !isAudioOn;
+        if (isAudioOn) {
+            if (bgm) bgm.play().catch(e => console.log("Autoplay blocked"));
+            if (audioIcon) audioIcon.innerText = '🔊';
+            if (audioStatus) audioStatus.innerText = '사운드 ON';
+        } else {
+            if (bgm) bgm.pause();
+            if (audioIcon) audioIcon.innerText = '🔇';
+            if (audioStatus) audioStatus.innerText = '사운드 OFF';
         }
     });
 }

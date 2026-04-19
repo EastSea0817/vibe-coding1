@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자정의 시험기간 | Midnight Exam</title>
-    <meta name="description" content="시험기간, 당신이 마주하게 될 가장 끔찍한 딴짓. 인터랙티브 공포 시뮬레이터.">
+    <meta name="description" content="자정의 시험기간, 당신이 갇힌 100층의 고사장을 탈출하십시오. 인터랙티브 공포 시뮬레이터.">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Special+Elite&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -18,8 +18,30 @@
         <!-- Start Screen -->
         <section id="start-screen" class="screen active">
             <h1 class="main-title glitch" data-text="자정의 시험기간">자정의 시험기간</h1>
-            <p class="subtitle">시험공부보다 더 무시무시한 일이 당신을 기다립니다.</p>
+            <p class="subtitle">기나긴 밤, 장소를 옮겨가며 벌어지는 기괴한 탈출극이 시작됩니다.</p>
             <button id="start-btn" class="horror-btn">체험 시작하기</button>
+        </section>
+ 
+        <!-- Warning Screen -->
+        <section id="warning-screen" class="screen">
+            <div class="warning-container">
+                <div class="warning-recommendations">
+                    <p>💡 화면 밝기를 최대한 높이는 것을 추천합니다.</p>
+                    <p>🎧 이어폰 착용을 강력히 추천합니다. (배경음악 ON 필수)</p>
+                </div>
+                <div class="warning-main">
+                    <p class="warning-text">
+                        본 게임은 잔인한 연출 및 공포스러운 장면을 포함하고 있습니다.<br>
+                        심신 미약자나 임산부, 공포물에 민감한 분들은 이용에 주의해 주시기 바랍니다.<br>
+                        (이어폰 착용 시 더욱 강한 충격을 받을 수 있습니다.)
+                    </p>
+                </div>
+                <div class="warning-guidance">
+                    <p>⚠️ 이 게임은 여러 갈래의 길 중 단 하나의 '트루 엔딩'을 향해 나아가는 여정입니다.</p>
+                    <p>선택에 따라 비극적인 '데드 엔딩'을 맞이할 수 있으나,<br>포기하지 말고 진실을 향해 계속 도전하십시오.</p>
+                </div>
+                <div class="warning-countdown">본격적인 공포가 곧 시작됩니다...</div>
+            </div>
         </section>
 
         <!-- Scenario Selection Screen -->
@@ -58,15 +80,17 @@
         <section id="story-screen" class="screen">
             <div class="scene-container">
                 <!-- Navigation UI -->
-                <div class="story-nav">
-                    <button id="back-btn" class="icon-btn" title="이전으로 돌아가기">
-                        <span>⬅</span> 이전 단계로
-                    </button>
+                <div class="scene-nav">
+                    <div id="location-display" class="floor-display">기숙사</div>
+                </div>
+
+                <!-- QTE Progress Bar -->
+                <div id="qte-timer-container" class="qte-timer-container">
+                    <div id="qte-progress" class="qte-progress"></div>
                 </div>
 
                 <div id="image-portal" class="image-portal">
                     <img id="scene-image" src="" alt="horror scene">
-                </div>
                 </div>
                 <div class="text-window">
                     <div id="scene-text" class="typewriter"></div>
@@ -76,22 +100,31 @@
                 </div>
             </div>
             
-            <!-- Audio UI -->
-            <div class="audio-controls">
-                <button id="audio-toggle" class="icon-btn">
-                    <span id="audio-icon">🔇</span>
-                    <span id="audio-status">사운드 OFF</span>
-                </button>
-            </div>
         </section>
 
-        <!-- Ending Screen -->
+        <!-- Audio UI Moved Outside Screens -->
+        <div class="audio-controls">
+            <button id="audio-toggle" class="icon-btn">
+                <span id="audio-icon">🔇</span>
+                <span id="audio-status">사운드 OFF</span>
+            </button>
+        </div>
+
         <section id="ending-screen" class="screen">
-            <h2 id="ending-title" class="ending-title"></h2>
-            <p id="ending-desc" class="ending-desc"></p>
-            <div class="action-buttons">
-                <button id="restart-btn" class="horror-btn">다시 시작하기</button>
-                <button id="share-btn" class="classic-btn">공포 공유하기</button>
+            <div class="ending-layout">
+                <div id="ending-image-portal" class="ending-image-portal">
+                    <img id="ending-image" src="" alt="ending background">
+                    <div class="ending-overlay">
+                        <div class="ending-text-group">
+                            <h2 id="ending-title" class="ending-title-large"></h2>
+                            <p id="ending-desc" class="ending-desc-small"></p>
+                        </div>
+                        <div class="ending-actions">
+                            <button id="retry-btn" class="ending-btn" style="display: none;">직전 선택지로 돌아가기</button>
+                            <button id="restart-btn" class="ending-btn">처음부터 다시하기</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
